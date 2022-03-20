@@ -12,9 +12,6 @@ const theme = createTheme({
     background: {
       default: '#3c3c3c',
     },
-    secondary: {
-      main: '#19857b',
-    },
     error: {
       main: red.A400,
     },

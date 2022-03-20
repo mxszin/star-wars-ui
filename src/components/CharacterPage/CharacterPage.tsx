@@ -1,11 +1,13 @@
-import { CardMedia, Container, Grid, Typography } from '@mui/material';
-import { Suspense } from 'react';
+import { Button, CardMedia, Container, Grid, Typography } from '@mui/material';
+import { Suspense, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { characterQuery } from '../../store/character';
+import { useRecoilState } from 'recoil';
+import { characterAtom } from '../../store/character';
+import EditCharacterModal from '../EditCharacterModal';
+import { EditCharacterFormValues } from '../EditCharacterModal/EditCharacterModal';
 import Loader from '../Loader';
 
-export type CharacterDetailsProps = {
+export type CharacterDetails = {
   name: string;
   height: string;
   mass: string;
@@ -13,8 +15,12 @@ export type CharacterDetailsProps = {
   gender: string;
 };
 
+type CharacterDetailsProps = CharacterDetails & {
+  onEditClick: () => void;
+};
+// TODO: Extract to component
 function CharacterDetails(props: CharacterDetailsProps) {
-  const { name, height, mass, birthYear, gender } = props;
+  const { name, height, mass, birthYear, gender, onEditClick } = props;
 
   return (
     <Grid container spacing={2}>
@@ -36,6 +42,9 @@ function CharacterDetails(props: CharacterDetailsProps) {
           <Typography>Mass: {mass}</Typography>
           <Typography>Gender: {gender}</Typography>
           <Typography>Birth year: {birthYear}</Typography>
+          <Button variant="contained" onClick={onEditClick}>
+            Edit
+          </Button>
         </Grid>
       </Grid>
     </Grid>
@@ -46,17 +55,39 @@ type CharacterPageContainerProps = {
   id: string;
 };
 
+// TODO: Extract to component
 function CharacterPageContainer(props: CharacterPageContainerProps) {
-  const char = useRecoilValue(characterQuery(props.id));
+  const [char, setChar] = useRecoilState(characterAtom(props.id));
+  const [isEditFormOpen, setIsEditFormOpen] = useState(false);
+  const openEditForm = () => setIsEditFormOpen(true);
+  const closeEditForm = () => setIsEditFormOpen(false);
+  const handleSubmit = (values: EditCharacterFormValues) => {
+    setChar((currentValue) => ({
+      ...currentValue,
+      ...values,
+    }));
+  };
 
   return (
-    <CharacterDetails
-      name={char.name}
-      gender={char.gender}
-      height={char.height}
-      mass={char.mass}
-      birthYear={char.birth_year}
-    />
+    <>
+      <CharacterDetails
+        name={char.name}
+        gender={char.gender}
+        height={char.height}
+        mass={char.mass}
+        birthYear={char.birth_year}
+        onEditClick={openEditForm}
+      />
+      <EditCharacterModal
+        isOpen={isEditFormOpen}
+        close={closeEditForm}
+        onSubmit={handleSubmit}
+        initialValues={{
+          height: char.height,
+          mass: char.mass,
+        }}
+      />
+    </>
   );
 }
 
