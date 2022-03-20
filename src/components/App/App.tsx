@@ -1,8 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import CharacterPage from '../CharacterPage';
-import Film from '../Film';
-import Films from '../Films';
 import Layout from '../Layout';
 import PeoplePage from '../PeoplePage';
 
@@ -12,11 +10,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<Navigate to="/films" />} />
+            <Route path="/" element={<Navigate to="/people" />} />
             <Route path="/people" element={<PeoplePage />} />
             <Route path="/people/:peopleId" element={<CharacterPage />} />
-            <Route path="/films" element={<Films />} />
-            <Route path="/films/:filmId" element={<Film />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

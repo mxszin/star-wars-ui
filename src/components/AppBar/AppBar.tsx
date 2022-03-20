@@ -12,10 +12,6 @@ const pages = [
     title: 'People',
     path: 'people',
   },
-  {
-    title: 'Films',
-    path: 'films',
-  },
 ];
 
 const ResponsiveAppBar = () => {
