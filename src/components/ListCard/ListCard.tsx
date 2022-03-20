@@ -1,19 +1,13 @@
 import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-// TODO: Think about FilmShortInfo name
-export type FilmShortInfo = {
+export type ListCardProps = {
   id: number;
   title: string;
-  // TODO: don't need
-  detailsUrl: string;
   shortInfo?: string;
 };
 
-type FilmCardProps = FilmShortInfo;
-
-// TODO: Make as a common Card
-function FilmCard(props: FilmCardProps) {
+function ListCard(props: ListCardProps) {
   const { title, shortInfo, id } = props;
 
   return (
@@ -43,4 +37,4 @@ function FilmCard(props: FilmCardProps) {
   );
 }
 
-export default FilmCard;
+export default ListCard;

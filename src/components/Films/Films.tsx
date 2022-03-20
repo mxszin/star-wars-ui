@@ -2,10 +2,10 @@ import { Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import getIdFromUrl from '../../lib/getIdFromUrl/getIdFromUrl';
 import { FilmsResponse } from '../../models/film';
-import FilmCard, { FilmShortInfo } from '../FilmCard';
+import ListCard, { ListCardProps } from '../ListCard';
 
 const useFilms = () => {
-  const [films, setFilms] = useState<FilmShortInfo[]>([]);
+  const [films, setFilms] = useState<ListCardProps[]>([]);
   const getFilms = async () => {
     const response = await fetch('https://swapi.dev/api/films');
     if (response.ok) {
@@ -42,7 +42,7 @@ function Films() {
     <Grid container spacing={2} sx={{ paddingTop: (theme) => theme.spacing(2) }}>
       {films.map((film) => (
         <Grid item xs={12} sm={6} lg={4} key={film.id}>
-          <FilmCard {...film} />
+          <ListCard {...film} />
         </Grid>
       ))}
     </Grid>

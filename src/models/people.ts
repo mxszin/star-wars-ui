@@ -19,4 +19,6 @@ export type PeopleItemResponse = {
   url: string;
 };
 
+export type CharacterResponse = PeopleItemResponse;
+
 export type PeopleResponse = ListResponse<PeopleItemResponse>;

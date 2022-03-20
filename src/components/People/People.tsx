@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 import { Grid, Pagination } from '@mui/material';
-import FilmCard, { FilmShortInfo } from '../FilmCard';
+import ListCard, { ListCardProps } from '../ListCard';
 
 type PeopleProps = {
-  people: FilmShortInfo[];
+  people: ListCardProps[];
   pageCount: number;
   currentPage: number;
   onChangePage: (page: number) => void;
@@ -22,8 +22,8 @@ function People(props: PeopleProps) {
     <Grid container spacing={2}>
       <Grid container item spacing={2}>
         {people.map((char) => (
-          <Grid item xs={4} key={char.id}>
-            <FilmCard {...char} />
+          <Grid item xs={12} sm={6} lg={4} key={char.id}>
+            <ListCard {...char} />
           </Grid>
         ))}
       </Grid>
