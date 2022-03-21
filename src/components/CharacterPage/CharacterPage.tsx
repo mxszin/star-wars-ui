@@ -98,11 +98,9 @@ function CharacterPage() {
     return <div>Not Found</div>;
   }
   return (
-    <Container>
-      <Suspense fallback={<Loader />}>
-        <CharacterPageContainer id={peopleId} />
-      </Suspense>
-    </Container>
+    <Suspense fallback={<Loader />}>
+      <CharacterPageContainer id={peopleId} />
+    </Suspense>
   );
 }
 

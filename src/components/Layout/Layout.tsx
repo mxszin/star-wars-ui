@@ -4,7 +4,8 @@ import { Outlet } from 'react-router-dom';
 import AppBar from '../AppBar';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
-  padding: `${theme.spacing(2)} 0`,
+  paddingTop: theme.spacing(2),
+  paddingBottom: theme.spacing(2),
 }));
 
 export default function Layout() {
